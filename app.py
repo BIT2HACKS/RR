@@ -71,11 +71,11 @@ THEME_IMAGES = [
 
 def find_image(stem_or_name):
     """Return a path for an exact file name, or for a stem with any known extension."""
-    exact = ASSETS / stem_or_name
+    exact = stem_or_name
     if exact.suffix and exact.exists():
         return exact
     for ext in MIME:
-        p = ASSETS / f"{stem_or_name}{ext}"
+        p = f"{stem_or_name}{ext}"
         if p.exists():
             return p
     return None
@@ -117,7 +117,7 @@ def theme_strip():
             if path:
                 show_image(data_uri(path))  # label is already drawn inside the image
             else:
-                st.caption(f"Missing assets/{fname}")
+                st.caption(f"Missing {fname}")
 
 
 def player_photo(stem, name, color, caption=None):
@@ -125,7 +125,7 @@ def player_photo(stem, name, color, caption=None):
     uri = data_uri(path) if path else placeholder_uri(name, color)
     show_image(uri, name if caption is None else caption, height=260)
     if not path:
-        st.caption(f"Add assets/{stem}.jpg to show a photo.")
+        st.caption(f"Add {stem}.jpg to show a photo.")
 
 
 # -------------------------- STYLING ---------------------------
